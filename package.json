@@ -8,6 +8,9 @@
         "type": "git",
         "url": "git+https://github.com/regal/regal-cli"
     },
+    "bin": {
+        "regal": "./bin/regal"
+    },
     "prettier": {
         "tabWidth": 4
     },
