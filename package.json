@@ -1,0 +1,28 @@
+{
+    "name": "regal-cli",
+    "version": "0.1.0",
+    "description": "Command line interface for creating games with the Regal Framework",
+    "author": "Joe Cowman <joe.r.cowman@gmail.com> (http://joecowman.com)",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/regal/regal-cli"
+    },
+    "prettier": {
+        "tabWidth": 4
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    },
+    "devDependencies": {
+        "commitizen": "^3.0.5",
+        "cz-conventional-changelog": "^2.1.0",
+        "prettier": "^1.16.4",
+        "tslint": "^5.12.1",
+        "tslint-config-prettier": "^1.18.0",
+        "tslint-plugin-prettier": "^2.0.1",
+        "typescript": "^3.3.3"
+    }
+}
