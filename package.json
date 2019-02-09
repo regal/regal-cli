@@ -11,6 +11,16 @@
     "bin": {
         "regal": "./bin/regal"
     },
+    "main": "dist/regal-cli.cjs.js",
+    "module": "dist/regal-cli.esm.js",
+    "types": "dist/src/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "scripts": {
+        "build": "rollup -c && tsc -d --emitDeclarationOnly --declarationDir ./dist",
+        "clean": "trash dist"
+    },
     "prettier": {
         "tabWidth": 4
     },
@@ -19,10 +29,19 @@
             "path": "./node_modules/cz-conventional-changelog"
         }
     },
+    "dependencies": {
+        "commander": "^2.19.0"
+    },
     "devDependencies": {
+        "@types/node": "^10.12.24",
         "commitizen": "^3.0.5",
         "cz-conventional-changelog": "^2.1.0",
         "prettier": "^1.16.4",
+        "rollup": "^1.1.2",
+        "rollup-plugin-cleanup": "^3.1.1",
+        "rollup-plugin-json": "^3.1.0",
+        "rollup-plugin-typescript2": "^0.19.2",
+        "trash-cli": "^1.4.0",
         "tslint": "^5.12.1",
         "tslint-config-prettier": "^1.18.0",
         "tslint-plugin-prettier": "^2.0.1",
