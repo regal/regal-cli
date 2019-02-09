@@ -2,7 +2,10 @@
     "defaultSeverity": "error",
     "extends": ["tslint:recommended", "tslint-plugin-prettier", "tslint-config-prettier"],
     "linterOptions": {
-        "exclude": "test/**/*.ts"
+        "exclude": [
+            "test/**/*.ts",
+            "bin/*"
+        ]
     },
     "rules": {
         "interface-name": false,
