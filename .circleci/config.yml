@@ -35,8 +35,9 @@ jobs:
                 name: Verify Build
                 command: npm run verify-unix
 
-            run tests!
-            - run: npm test
+            - run: 
+                name: Run Tests
+                command: npm test
 
             # - run:
             #       name: Publish Test Coverage
