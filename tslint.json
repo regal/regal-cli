@@ -16,6 +16,7 @@
                 "allow-leading-underscore"
             ]
         },
-        "prettier": true
+        "prettier": true,
+        "no-console": false
     }
 }

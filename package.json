@@ -34,11 +34,15 @@
     "dependencies": {
         "commander": "^2.19.0"
     },
+    "peerDependencies": {
+        "regal-bundler": "^1.0.0"
+    },
     "devDependencies": {
         "@types/node": "^10.12.24",
         "commitizen": "^3.0.5",
         "cz-conventional-changelog": "^2.1.0",
         "prettier": "^1.16.4",
+        "regal-bundler": "^1.0.0",
         "rollup": "^1.1.2",
         "rollup-plugin-cleanup": "^3.1.1",
         "rollup-plugin-json": "^3.1.0",
