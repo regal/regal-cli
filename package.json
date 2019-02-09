@@ -21,7 +21,9 @@
         "clean": "trash dist",
         "lint": "node node_modules/tslint/bin/tslint -c tslint.json --format stylish 'src/**/*.ts'",
         "verify-unix": "chmod +x ./bin/regal && ./bin/regal",
-        "commit": "git-cz"
+        "commit": "git-cz",
+        "test": "npm run test:unit",
+        "test:unit": "jest test/unit --coverage"
     },
     "prettier": {
         "tabWidth": 4
@@ -38,9 +40,11 @@
         "regal-bundler": "^1.0.0"
     },
     "devDependencies": {
+        "@types/jest": "^24.0.0",
         "@types/node": "^10.12.24",
         "commitizen": "^3.0.5",
         "cz-conventional-changelog": "^2.1.0",
+        "jest": "^24.1.0",
         "prettier": "^1.16.4",
         "regal-bundler": "^1.0.0",
         "rollup": "^1.1.2",
@@ -48,6 +52,7 @@
         "rollup-plugin-json": "^3.1.0",
         "rollup-plugin-typescript2": "^0.19.2",
         "trash-cli": "^1.4.0",
+        "ts-jest": "^23.10.5",
         "tslint": "^5.12.1",
         "tslint-config-prettier": "^1.18.0",
         "tslint-plugin-prettier": "^2.0.1",
