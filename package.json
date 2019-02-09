@@ -21,7 +21,7 @@
         "build": "rollup -c && tsc -d --emitDeclarationOnly --declarationDir ./dist",
         "clean": "trash dist",
         "lint": "node node_modules/tslint/bin/tslint -c tslint.json --format stylish 'src/**/*.ts'",
-        "verify-unix": "./bin/regal",
+        "verify-unix": "chmod +x ./bin/regal && ./bin/regal",
         "commit": "git-cz"
     },
     "prettier": {
