@@ -13,12 +13,11 @@
     },
     "main": "dist/regal-cli.cjs.js",
     "module": "dist/regal-cli.esm.js",
-    "types": "dist/src/index.d.ts",
     "files": [
         "dist/"
     ],
     "scripts": {
-        "build": "rollup -c && tsc -d --emitDeclarationOnly --declarationDir ./dist",
+        "build": "rollup -c",
         "clean": "trash dist",
         "lint": "node node_modules/tslint/bin/tslint -c tslint.json --format stylish 'src/**/*.ts'",
         "verify-unix": "chmod +x ./bin/regal && ./bin/regal",
