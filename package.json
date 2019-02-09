@@ -19,7 +19,10 @@
     ],
     "scripts": {
         "build": "rollup -c && tsc -d --emitDeclarationOnly --declarationDir ./dist",
-        "clean": "trash dist"
+        "clean": "trash dist",
+        "lint": "node node_modules/tslint/bin/tslint -c tslint.json --format stylish 'src/**/*.ts'",
+        "verify-unix": "./bin/regal",
+        "commit": "git-cz"
     },
     "prettier": {
         "tabWidth": 4
