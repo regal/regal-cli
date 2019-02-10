@@ -5,10 +5,10 @@
  * Licensed under MIT License (see https://github.com/regal/regal-cli)
  */
 
-import { CommanderStatic } from "commander";
+import { Command } from "commander";
 import { bundle, BundlerOptions, RecursivePartial } from "regal-bundler";
 
-export default (program: CommanderStatic) =>
+export default (program: Command) =>
     program
         .command("bundle")
         .description("create a Regal game bundle")

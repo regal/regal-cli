@@ -14,8 +14,6 @@ program.version(pkg.version, "-v, --version").description(pkg.description);
 /* Load commands */
 bundleCommand(program);
 
-console.log(process.argv);
-
 program.parse(process.argv);
 
 if (!program.args.length) {
