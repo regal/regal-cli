@@ -53,7 +53,7 @@ describe("Bundle Command", () => {
     it.each(["--input-file", "-i"])("InputFile option: %s", opt => {
         const val = "some-src.ts";
 
-        getProgram().parse(argv("--input-file", val));
+        getProgram().parse(argv(opt, val));
 
         expect(bundleMock).toBeCalledWith({
             bundler: {
@@ -62,4 +62,20 @@ describe("Bundle Command", () => {
             }
         });
     });
+
+    it.each([["", true], ["true", true], ["false", false]])(
+        "InputTS option: --input-ts %s",
+        (opt, val) => {
+            const args =
+                opt === "" ? argv("--input-ts") : argv("--input-ts", opt);
+            getProgram().parse(args);
+
+            expect(bundleMock).toBeCalledWith({
+                bundler: {
+                    input: { ts: val },
+                    output: {}
+                }
+            });
+        }
+    );
 });
