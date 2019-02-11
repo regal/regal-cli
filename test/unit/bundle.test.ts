@@ -78,4 +78,71 @@ describe("Bundle Command", () => {
             });
         }
     );
+
+    it.each(["--output-file", "-o"])("OutputFile option: %s", opt => {
+        const val = "some-out.regal.js";
+
+        getProgram().parse(argv(opt, val));
+
+        expect(bundleMock).toBeCalledWith({
+            bundler: {
+                input: {},
+                output: { file: val }
+            }
+        });
+    });
+
+    it.each(["--bundle-type", "-b"])("BundleType option: %s", opt => {
+        const val = "standard";
+
+        getProgram().parse(argv(opt, val));
+
+        expect(bundleMock).toBeCalledWith({
+            bundler: {
+                input: {},
+                output: { bundle: val }
+            }
+        });
+    });
+
+    it.each(["--format", "-f"])("Format option: %s", opt => {
+        const val = "cjs";
+
+        getProgram().parse(argv(opt, val));
+
+        expect(bundleMock).toBeCalledWith({
+            bundler: {
+                input: {},
+                output: { format: val }
+            }
+        });
+    });
+
+    it.each([
+        ["--minify", "", true],
+        ["-m", "true", true],
+        ["--minify", "false", false]
+    ])("Minify option: %s %s", (command, option, val) => {
+        const args = option === "" ? argv(command) : argv(command, option);
+        getProgram().parse(args);
+
+        expect(bundleMock).toBeCalledWith({
+            bundler: {
+                input: {},
+                output: { minify: val }
+            }
+        });
+    });
+
+    it("Error check for illegal InputTS argument", () => {
+        expect(() =>
+            getProgram().parse(argv("--input-ts", "blarp"))
+        ).toThrowError("Illegal argument for --input-ts. Must be a boolean.");
+    });
+
+    it("Error check for illegal Minify argument", () => {
+        expect(() =>
+            getProgram().parse(argv("--minify", "blarp"))
+        ).toThrowError("Illegal argument for --minify. Must be a boolean.");
+    });
 });
