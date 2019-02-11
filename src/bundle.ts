@@ -42,7 +42,7 @@ export default (program: Command) =>
             "type of bundle to produce (default: standard)"
         )
         .option(
-            "-f, --format, --module",
+            "-f, --format <type>",
             "module format of the bundle: cjs (default), esm, or umd"
         )
         .option(
