@@ -1,6 +1,7 @@
 import * as regalBundler from "regal-bundler";
-import { Command } from "commander";
 import bundleCommand from "../../src/bundle";
+import { Command } from "commander";
+import * as CommandStatic from "commander";
 
 /* Mock the call to regal-bundler */
 jest.mock("regal-bundler");
@@ -144,5 +145,9 @@ describe("Bundle Command", () => {
         expect(() =>
             getProgram().parse(argv("--minify", "blarp"))
         ).toThrowError("Illegal argument for --minify. Must be a boolean.");
+    });
+
+    it("Custom help message", () => {
+        CommandStatic.parse(argv("--help"));
     });
 });
