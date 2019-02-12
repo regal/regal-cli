@@ -23,7 +23,8 @@
         "verify-unix": "chmod +x ./bin/regal && ./bin/regal",
         "commit": "git-cz",
         "test": "npm run test:unit",
-        "test:unit": "jest test/unit --coverage"
+        "test:unit": "jest test/unit --coverage",
+        "publish-coverage": "cat ./coverage/lcov.info | coveralls"
     },
     "prettier": {
         "tabWidth": 4
@@ -43,6 +44,7 @@
         "@types/jest": "^24.0.0",
         "@types/node": "^10.12.24",
         "commitizen": "^3.0.5",
+        "coveralls": "^3.0.2",
         "cz-conventional-changelog": "^2.1.0",
         "jest": "^24.1.0",
         "prettier": "^1.16.4",
