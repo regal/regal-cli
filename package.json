@@ -24,6 +24,8 @@
         "commit": "git-cz",
         "test": "npm run test:unit",
         "test:unit": "jest test/unit --coverage",
+        "test:e2e:setup": "ts-node test/e2e/setup.ts",
+        "test:e2e:teardown": "trash ./test/**/temp",
         "publish-coverage": "cat ./coverage/lcov.info | coveralls"
     },
     "prettier": {

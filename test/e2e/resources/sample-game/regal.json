@@ -1,0 +1,10 @@
+{
+    "game": {
+        "name": "Sample Game",
+        "author": "Lars"
+    },
+    "bundler": {
+        "input": { "file": "./src.ts" },
+        "output": { "file": "./temp/bundle.regal.js" }
+    }
+}
