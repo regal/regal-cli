@@ -3,8 +3,11 @@ import * as path from "path";
 import { exec } from "child_process";
 
 const logbacks = callback => (error, stdout, stderr) => {
-    if (error || stderr) {
+    if (error) {
         throw new Error(error);
+    }
+    if (stderr) {
+        throw new Error(stderr);
     }
     if (stdout) {
         callback();
