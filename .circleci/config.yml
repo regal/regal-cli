@@ -33,7 +33,7 @@ jobs:
 
             - run:
                 name: Verify Build
-                command: npm run verify-unix"
+                command: npm run verify-unix
 
             - run: 
                 name: Run Tests
