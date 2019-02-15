@@ -13,7 +13,7 @@ const logbacks = callback => (error, stdout, stderr) => {
 
 it("Bundle-Verify", done => {
     exec(
-        "regal bundle -c ./test/e2e/resources/sample-game -o ./test/e2e/resources/temp/bundle.verify.regal.js",
+        "./bin/regal bundle -c ./test/e2e/resources/sample-game -o ./test/e2e/resources/temp/bundle.verify.regal.js",
         logbacks(async () => {
             fs.readFile(
                 path.join(
