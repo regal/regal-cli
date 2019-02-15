@@ -22,7 +22,7 @@
         "lint": "node node_modules/tslint/bin/tslint -c tslint.json --format stylish 'src/**/*.ts'",
         "verify-unix": "chmod +x ./bin/regal && ./bin/regal",
         "commit": "git-cz",
-        "test": "npm run test:unit",
+        "test": "npm run test:unit && npm run test:e2e",
         "test:unit": "jest test/unit --coverage",
         "test:e2e": "npm run test:e2e:setup && npm run test:e2e:run && npm run test:e2e:teardown",
         "test:e2e:setup": "ts-node test/e2e/setup.ts",
