@@ -33,7 +33,7 @@ jobs:
 
             - run:
                 name: Verify Build
-                command: npm run verify-unix && npm link
+                command: npm run verify-unix && alias regal="./bin/regal"
 
             - run: 
                 name: Run Tests
