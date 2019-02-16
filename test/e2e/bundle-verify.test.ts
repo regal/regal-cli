@@ -2,6 +2,10 @@ import * as fs from "fs";
 import * as path from "path";
 import { exec } from "child_process";
 
+import { isWin } from "../test-utils";
+
+const execRegal = isWin ? "regal" : "./bin/regal";
+
 const logbacks = callback => (error, stdout, stderr) => {
     if (error) {
         throw new Error(error);
@@ -16,7 +20,7 @@ const logbacks = callback => (error, stdout, stderr) => {
 
 it("Bundle-Verify", done => {
     exec(
-        "./bin/regal bundle -c ./test/e2e/resources/sample-game -o ./test/e2e/resources/temp/bundle.verify.regal.js",
+        `${execRegal} bundle -c ./test/e2e/resources/sample-game -o ./test/e2e/resources/temp/bundle.verify.regal.js`,
         logbacks(async () => {
             fs.readFile(
                 path.join(

@@ -3,7 +3,7 @@
         "regal": "^1.0.0"
     },
     "devDependencies": {
-        "regal-bundler": "^1.0.0",
+        "regal-bundler": "^1.1.0",
         "typescript": "^3.3.3"
     },
     "scripts": {
