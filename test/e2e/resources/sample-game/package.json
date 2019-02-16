@@ -1,0 +1,12 @@
+{
+    "dependencies": {
+        "regal": "^1.0.0"
+    },
+    "devDependencies": {
+        "regal-bundler": "^1.1.0",
+        "typescript": "^3.3.3"
+    },
+    "scripts": {
+        "build": "node build.js"
+    }
+}
