@@ -8,11 +8,13 @@
 import * as program from "commander";
 import * as pkg from "./../package.json";
 import bundleCommand from "./bundle";
+import playCommand from "./play";
 
 program.version(pkg.version, "-v, --version").description(pkg.description);
 
 /* Load commands */
 bundleCommand(program);
+playCommand(program);
 
 program.parse(process.argv);
 
