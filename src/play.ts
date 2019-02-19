@@ -1,6 +1,7 @@
 import { Command } from "commander";
+import path from "path";
 import { createInterface } from "readline";
-import { GameApi, GameResponse } from "regal";
+import { GameApi, GameResponse, RegalError } from "regal";
 
 // Helper function to print output lines
 const printLines = (gameResponse: GameResponse) => {
@@ -18,21 +19,33 @@ export default (program: Command) =>
     program
         .command("play <file>")
         .description("play a standard Regal game bundle from the terminal")
-        .action(args => {
+        .action(async file => {
             const io = createInterface({
                 input: process.stdin,
                 output: process.stdout,
                 terminal: false
             });
 
-            console.log(args.file);
+            const fullPath = path.join(process.cwd(), file);
 
-            import(args.file).then((game: GameApi) => {
+            try {
+                const game = (await import(fullPath)) as GameApi;
+
+                const metadata = game.getMetadataCommand().output.metadata;
+                console.log(
+                    `Now Playing: ${metadata.name} by ${metadata.author}`
+                );
+                console.log("Type :quit to exit the game.");
+
                 const start = game.postStartCommand();
                 printLines(start);
                 let gameInstance = start.instance;
 
                 io.on("line", command => {
+                    if (command === ":quit") {
+                        process.exit();
+                    }
+
                     const response = game.postPlayerCommand(
                         gameInstance,
                         command
@@ -42,5 +55,10 @@ export default (program: Command) =>
                         gameInstance = response.instance;
                     }
                 });
-            });
+            } catch (ex) {
+                console.error(
+                    `ERROR: Could not resolve a bundle at ${fullPath}`
+                );
+                process.exit();
+            }
         });
