@@ -6,6 +6,7 @@ interface S {
 
 onStartCommand(game => {
     game.output.write("Hello, world!");
+    game.state.commands = [];
 });
 
 onPlayerCommand(cmd => (game: GameInstance<S>) => {
@@ -14,9 +15,9 @@ onPlayerCommand(cmd => (game: GameInstance<S>) => {
     const numCmds = game.state.commands.length;
     let priorStr = "";
     if (numCmds > 0) {
-        priorStr += `Recently, you said ${game.state.commands[length - 1]}`;
+        priorStr += `Recently, you said ${game.state.commands[numCmds - 1]}`;
         if (numCmds > 1) {
-            priorStr += ` and ${game.state.commands[length - 2]}`;
+            priorStr += ` and ${game.state.commands[numCmds - 2]}`;
         } else {
             priorStr += ".";
         }
