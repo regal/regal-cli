@@ -4,7 +4,7 @@ import { exec } from "child_process";
 
 import { execRegal, logbacks } from "../test-utils";
 
-it.skip("Bundle-Verify", done => {
+it("Bundle-Verify", done => {
     exec(
         `${execRegal} bundle -c ./test/e2e/resources/sample-game -o ./test/e2e/resources/temp/bundle.verify.regal.js`,
         logbacks(async () => {

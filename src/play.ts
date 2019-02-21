@@ -1,7 +1,7 @@
 import { Command } from "commander";
 import path from "path";
 import { createInterface } from "readline";
-import { GameApi, GameResponse, RegalError } from "regal";
+import { GameApi, GameResponse } from "regal";
 
 // Helper function to print output lines
 const printLines = (gameResponse: GameResponse) => {
