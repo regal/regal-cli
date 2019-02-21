@@ -2,16 +2,17 @@ import { Command } from "commander";
 import path from "path";
 import { createInterface } from "readline";
 import { GameApi, GameResponse } from "regal";
+import { error, log } from "./wrappers";
 
 // Helper function to print output lines
 const printLines = (gameResponse: GameResponse) => {
-    console.log("");
+    log("");
     if (gameResponse.output.wasSuccessful) {
         for (const line of gameResponse.output.log) {
-            console.log(line.data);
+            log(line.data);
         }
     } else {
-        console.log(gameResponse);
+        log(gameResponse);
     }
 };
 
@@ -32,10 +33,10 @@ export default (program: Command) =>
                 const game = (await import(fullPath)) as GameApi;
 
                 const metadata = game.getMetadataCommand().output.metadata;
-                console.log(
-                    `Now Playing: ${metadata.name} by ${metadata.author}`
+                log(
+                    `Now Playing: ${metadata.name} by ${metadata.author}`,
+                    "Type :quit to exit the game."
                 );
-                console.log("Type :quit to exit the game.");
 
                 const start = game.postStartCommand();
                 printLines(start);
@@ -56,9 +57,7 @@ export default (program: Command) =>
                     }
                 });
             } catch (ex) {
-                console.error(
-                    `ERROR: Could not resolve a bundle at ${fullPath}`
-                );
+                error(`ERROR: Could not resolve a bundle at ${fullPath}`);
                 process.exit();
             }
         });
