@@ -1,31 +1,38 @@
 import { spawn } from "child_process";
-import { execRegal, logbacks } from "../test-utils";
+import { execRegal } from "../test-utils";
 
-it.skip("Play-Verify", done => {
-    const proc = spawn(
-        `${execRegal} play ./test/e2e/resources/sample-game/temp/bundle.regal.js`,
-        {
-            shell: true
-        }
-    );
+it("Play-Verify", done => {
+    const bundlePath = "./test/e2e/resources/sample-game/temp/bundle.regal.js";
 
-    let isDone = false;
+    const proc = spawn(execRegal, ["play", bundlePath], {
+        cwd: process.cwd(),
+        shell: true
+    });
+
+    let firstResponse = true;
+    const commands = ["hey there!", "foo", "asdfjf", ":quit"];
+
+    let OUTPUT = "";
 
     proc.stderr.on("data", data => {
-        if (!isDone) {
-            isDone = true;
-            console.log("stderr");
-            // proc.kill();
-            done();
-        }
+        throw new Error("StdErr: " + data.toString());
+    });
+
+    proc.on("error", err => {
+        throw new Error("ERROR: " + JSON.stringify(err));
     });
 
     proc.stdout.on("data", data => {
-        if (!isDone) {
-            console.log("data");
-            done();
+        // console.log(data.toString());
+        OUTPUT += `\n${data.toString()}`;
+        if (!firstResponse) {
+            proc.stdin.write(commands.shift() + "\n");
         }
+        firstResponse = false;
     });
 
-    while (true) {} // TODO - start here
+    proc.on("exit", () => {
+        expect(OUTPUT).toMatchSnapshot();
+        done();
+    });
 });

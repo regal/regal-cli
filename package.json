@@ -52,6 +52,7 @@
         "coveralls": "^3.0.2",
         "cz-conventional-changelog": "^2.1.0",
         "jest": "^24.1.0",
+        "jest-snapshot-serializer-raw": "^1.1.0",
         "prettier": "^1.16.4",
         "regal-bundler": "^1.1.0",
         "rollup": "^1.1.2",
