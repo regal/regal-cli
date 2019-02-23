@@ -1,3 +1,11 @@
+/*
+ * CLI play command, which loads a standard Regal game bundle to be played
+ * through the terminal.
+ *
+ * Copyright (c) Joseph R Cowman
+ * Licensed under MIT License (see https://github.com/regal/regal-bundler)
+ */
+
 import { Command } from "commander";
 import path from "path";
 import { createInterface } from "readline";
