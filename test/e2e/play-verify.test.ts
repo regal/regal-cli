@@ -4,7 +4,7 @@ import { execRegal } from "../test-utils";
 it("Play-Verify", done => {
     const bundlePath = "./test/e2e/resources/sample-game/temp/bundle.regal.js";
 
-    const proc = spawn(execRegal, ["play", bundlePath], {
+    const proc = spawn(execRegal, ["play", bundlePath, "--seed", "w00f"], {
         cwd: process.cwd(),
         shell: true
     });
