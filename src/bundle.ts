@@ -7,17 +7,16 @@
 
 import { Command } from "commander";
 import { bundle, BundlerOptions, RecursivePartial } from "regal-bundler";
+import { log } from "./wrappers";
 
 export default (program: Command) =>
     program
         .command("bundle")
         .description("create a Regal game bundle")
         .on("--help", () => {
-            console.log("");
-            console.log(
-                "will load configuration values from regal.json or package.json,"
-            );
-            console.log(
+            log(
+                "",
+                "will load configuration values from regal.json or package.json,",
                 "but any options specified here will override their respective values "
             );
         })

@@ -2,21 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { exec } from "child_process";
 
-import { isWin } from "../test-utils";
-
-const execRegal = isWin ? "regal" : "./bin/regal";
-
-const logbacks = callback => (error, stdout, stderr) => {
-    if (error) {
-        throw new Error(error);
-    }
-    if (stderr) {
-        throw new Error(stderr);
-    }
-    if (stdout) {
-        callback();
-    }
-};
+import { execRegal, logbacks } from "../test-utils";
 
 it("Bundle-Verify", done => {
     exec(

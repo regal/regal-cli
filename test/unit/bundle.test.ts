@@ -2,12 +2,20 @@ import * as regalBundler from "regal-bundler";
 import bundleCommand from "../../src/bundle";
 import { Command } from "commander";
 import * as CommandStatic from "commander";
+import * as Wrappers from "../../src/wrappers";
+
+//@ts-ignore
+const exitSpy: any = jest.spyOn(process, "exit").mockImplementation(() => {});
+jest.spyOn(console, "log").mockImplementation(() => {});
+jest.spyOn(console, "error").mockImplementation(() => {});
 
 /* Mock the call to regal-bundler */
 jest.mock("regal-bundler");
 const bundleMock = jest.fn();
 // @ts-ignore
 regalBundler.bundle = bundleMock;
+
+const logSpy = jest.spyOn(Wrappers, "log");
 
 /* Utility function to produce argv */
 const argv = (...args: string[]) =>
@@ -24,6 +32,19 @@ const getProgram = () => {
 describe("Bundle Command", () => {
     beforeEach(() => {
         bundleMock.mockReset();
+    });
+
+    it("Custom help", done => {
+        exitSpy.mockImplementationOnce(() => {
+            expect(logSpy.mock.calls[0]).toEqual([
+                "",
+                "will load configuration values from regal.json or package.json,",
+                "but any options specified here will override their respective values "
+            ]);
+            done();
+        });
+
+        getProgram().parse(argv("-h"));
     });
 
     it("No-argument call", () => {
