@@ -57,7 +57,8 @@ export default (program: Command) =>
                     }
                 });
             } catch (ex) {
-                error(`ERROR: Could not resolve a bundle at ${fullPath}`);
+                error(`ERROR: Could not resolve a bundle at ${fullPath}\n`);
+                error(ex.stack);
                 process.exit();
             }
         });

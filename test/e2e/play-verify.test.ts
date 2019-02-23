@@ -23,8 +23,7 @@ it("Play-Verify", done => {
     });
 
     proc.stdout.on("data", data => {
-        // console.log(data.toString());
-        OUTPUT += `\n${data.toString()}`;
+        OUTPUT += `${data.toString()}`;
         if (!firstResponse) {
             proc.stdin.write(commands.shift() + "\n");
         }
