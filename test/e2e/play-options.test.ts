@@ -37,8 +37,9 @@ const testOut = (arg: string[], done) => {
 };
 
 describe("Play-Options", () => {
-    it("Play-Options: --debug", done => testOut(["--debug"], done));
+    it("Play-Options: --debug", done =>
+        testOut(["--debug", "--seed", "seed1"], done));
 
     it("Play-Options: --showMinor false", done =>
-        testOut(["--showMinor", "false"], done));
+        testOut(["--showMinor", "false", "--seed", "seed2"], done));
 });
