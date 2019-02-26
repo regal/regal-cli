@@ -7,7 +7,7 @@
  */
 
 import { Command } from "commander";
-import path from "path";
+import * as path from "path";
 import { createInterface } from "readline";
 import { GameApi, GameOptions, GameResponse } from "regal";
 import { parseBoolean } from "./utils";
