@@ -1,8 +1,8 @@
 import { Command } from "commander";
-import playCommand from "../../src/play";
 import * as readline from "readline";
 import { join } from "path";
 import * as wrappers from "../../src/wrappers";
+import playCommand from "../../src/play";
 
 /* Readline Mock */
 jest.mock("readline");
@@ -16,15 +16,41 @@ const ioMock = jest.fn().mockImplementation(() => ({ on: listenerMock }));
 //@ts-ignore
 readline.createInterface = ioMock;
 
-/* Game API Mock */
-const gameMock = jest.fn();
+/* Game API Mocks */
+const gameMetadataMock = jest.fn(() => ({
+    output: {
+        metadata: {
+            name: "Test Game",
+            author: "Test Author"
+        }
+    }
+}));
+const gameStartMock = jest.fn(() => ({
+    output: {
+        wasSuccessful: true,
+        log: [
+            {
+                data: "Test Line Data"
+            }
+        ]
+    }
+}));
+const gameMock = {
+    getMetadataCommand: () => gameMetadataMock,
+    postStartCommand: () => gameStartMock
+};
+
+/* Dynamic Import Mock */
 jest.spyOn(wrappers, "importDynamic").mockImplementation(() =>
     Promise.resolve(gameMock)
 );
 
 /* Stdout Mock */
-const logMock = jest.spyOn(wrappers, "log").mockImplementation(() => {});
+const logMock = jest.fn(a => console.log(`LOGGED ${a}`));
+//@ts-ignore
+wrappers.log = logMock;
 
+/* Process Exit Mock */
 //@ts-ignore
 const exitSpy: any = jest.spyOn(process, "exit").mockImplementation(() => {});
 
@@ -39,38 +65,23 @@ const getProgram = () => {
     return program;
 };
 
-describe.skip("Play Command", () => {
+describe("Play Command", () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });
 
-    describe("Various Options", () => {
-        beforeEach(() => {
-            gameMock.mockImplementation(() => ({
-                getMetadataCommand: () => ({
-                    output: {
-                        metadata: {
-                            name: "Test Game",
-                            author: "Test Author"
-                        }
-                    }
-                }),
-                postStartCommand: () => ({
-                    output: {
-                        wasSuccessful: true,
-                        log: [
-                            {
-                                data: "Test Line Data"
-                            }
-                        ]
-                    }
-                })
-            }));
-        });
-
-        it("No-argument call", () => {
-            getProgram().parse(argv("foo"));
-            expect(logMock).toHaveBeenCalled();
-        });
+    it("Print metadata and start lines on game load", done => {
+        getProgram().parse(argv("foo"));
+        logMock
+            .mockImplementationOnce(i =>
+                expect(i).toEqual("Now Playing: Test Game by Test Author")
+            )
+            .mockImplementationOnce(i => expect(i).toEqual(""))
+            .mockImplementationOnce(i => {
+                expect(i).toEqual("Test Line Data");
+                done();
+            });
     });
+
+    describe("Various Commands", () => {});
 });

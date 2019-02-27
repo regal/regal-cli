@@ -11,7 +11,7 @@ import * as path from "path";
 import { createInterface } from "readline";
 import { GameApi, GameOptions, GameResponse } from "regal";
 import { parseBoolean } from "./utils";
-import { error, log } from "./wrappers";
+import { error, importDynamic, log } from "./wrappers";
 
 // Helper function to print output lines
 const printLines = (gameResponse: GameResponse) => {
@@ -77,7 +77,7 @@ export default (program: Command) =>
             const fullPath = path.join(process.cwd(), file);
 
             try {
-                const game = (await import(fullPath)) as GameApi;
+                const game = (await importDynamic(fullPath)) as GameApi;
 
                 const metadata = game.getMetadataCommand().output.metadata;
                 log(
