@@ -3,6 +3,7 @@ import * as readline from "readline";
 import { join } from "path";
 import * as wrappers from "../../src/wrappers";
 import playCommand from "../../src/play";
+import { GameOptions } from "regal";
 
 /* Readline Mock */
 jest.mock("readline");
@@ -25,7 +26,7 @@ const gameMetadataMock = jest.fn(() => ({
         }
     }
 }));
-const gameStartMock = jest.fn(() => ({
+const gameStartMock = jest.fn((opts?: GameOptions) => ({
     output: {
         wasSuccessful: true,
         log: [
@@ -36,8 +37,8 @@ const gameStartMock = jest.fn(() => ({
     }
 }));
 const gameMock = {
-    getMetadataCommand: () => gameMetadataMock,
-    postStartCommand: () => gameStartMock
+    getMetadataCommand: gameMetadataMock,
+    postStartCommand: gameStartMock
 };
 
 /* Dynamic Import Mock */
@@ -46,7 +47,7 @@ jest.spyOn(wrappers, "importDynamic").mockImplementation(() =>
 );
 
 /* Stdout Mock */
-const logMock = jest.fn(a => console.log(`LOGGED ${a}`));
+const logMock = jest.fn();
 //@ts-ignore
 wrappers.log = logMock;
 
@@ -63,6 +64,16 @@ const getProgram = () => {
     const program = new Command();
     playCommand(program);
     return program;
+};
+
+const failsafeDone = (test, done) => {
+    try {
+        test();
+    } catch (ex) {
+        done();
+        throw ex;
+    }
+    done();
 };
 
 describe("Play Command", () => {
@@ -83,5 +94,13 @@ describe("Play Command", () => {
             });
     });
 
-    describe("Various Commands", () => {});
+    describe("Various Commands", () => {
+        it("No-arg command", done => {
+            gameStartMock.mockImplementationOnce(opts => {
+                failsafeDone(() => expect(opts).toEqual({}), done);
+                return gameStartMock();
+            });
+            getProgram().parse(argv("foo"));
+        });
+    });
 });
