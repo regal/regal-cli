@@ -102,5 +102,38 @@ describe("Play Command", () => {
             });
             getProgram().parse(argv("foo"));
         });
+
+        it("Debug option", done => {
+            gameStartMock.mockImplementationOnce(opts => {
+                failsafeDone(() => expect(opts).toEqual({ debug: true }), done);
+                return gameStartMock();
+            });
+
+            getProgram().parse(argv("foo", "--debug"));
+        });
+
+        it("ShowMinor option", done => {
+            gameStartMock.mockImplementationOnce(opts => {
+                failsafeDone(
+                    () => expect(opts).toEqual({ showMinor: true }),
+                    done
+                );
+                return gameStartMock();
+            });
+
+            getProgram().parse(argv("foo", "--showMinor", "true"));
+        });
+
+        it("TrackAgentChanges option", done => {
+            gameStartMock.mockImplementationOnce(opts => {
+                failsafeDone(
+                    () => expect(opts).toEqual({ trackAgentChanges: false }),
+                    done
+                );
+                return gameStartMock();
+            });
+
+            getProgram().parse(argv("foo", "--trackAgentChanges", "false"));
+        });
     });
 });
