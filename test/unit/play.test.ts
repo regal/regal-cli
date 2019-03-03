@@ -135,5 +135,17 @@ describe("Play Command", () => {
 
             getProgram().parse(argv("foo", "--trackAgentChanges", "false"));
         });
+
+        it("Seed option", done => {
+            gameStartMock.mockImplementationOnce(opts => {
+                failsafeDone(
+                    () => expect(opts).toEqual({ seed: "lars" }),
+                    done
+                );
+                return gameStartMock();
+            });
+
+            getProgram().parse(argv("foo", "--seed", "lars"));
+        });
     });
 });
