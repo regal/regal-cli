@@ -7,10 +7,11 @@
  */
 
 import { Command } from "commander";
-import path from "path";
+import * as path from "path";
 import { createInterface } from "readline";
-import { GameApi, GameResponse } from "regal";
-import { error, log } from "./wrappers";
+import { GameApi, GameOptions, GameResponse } from "regal";
+import { parseBoolean } from "./utils";
+import { error, importDynamic, log } from "./wrappers";
 
 // Helper function to print output lines
 const printLines = (gameResponse: GameResponse) => {
@@ -24,11 +25,49 @@ const printLines = (gameResponse: GameResponse) => {
     }
 };
 
+const makeOptions = (args): GameOptions => {
+    const opts = {} as any;
+
+    if (args.debug !== undefined) {
+        opts.debug = parseBoolean("--debug", args.debug);
+    }
+    if (args.showMinor !== undefined) {
+        opts.showMinor = parseBoolean("--showMinor", args.showMinor);
+    }
+    if (args.trackAgentChanges !== undefined) {
+        opts.trackAgentChanges = parseBoolean(
+            "--trackAgentChanges",
+            args.trackAgentChanges
+        );
+    }
+    if (args.seed !== undefined) {
+        opts.seed = args.seed;
+    }
+
+    return opts;
+};
+
 export default (program: Command) =>
     program
         .command("play <file>")
         .description("play a standard Regal game bundle from the terminal")
-        .action(async file => {
+        .option(
+            "--debug [boolean]",
+            "load the game bundle in debug mode (default: false)"
+        )
+        .option(
+            "--showMinor [boolean]",
+            "whether minor output should be shown (default: true)"
+        )
+        .option(
+            "--trackAgentChanges [boolean]",
+            "whether all changes to agent properties should be tracked (default: false)"
+        )
+        .option(
+            "--seed <string>",
+            "Optional string used to initialize pseudorandom number generation in each game instance."
+        )
+        .action(async (file, args) => {
             const io = createInterface({
                 input: process.stdin,
                 output: process.stdout,
@@ -38,7 +77,7 @@ export default (program: Command) =>
             const fullPath = path.join(process.cwd(), file);
 
             try {
-                const game = (await import(fullPath)) as GameApi;
+                const game = (await importDynamic(fullPath)) as GameApi;
 
                 const metadata = game.getMetadataCommand().output.metadata;
                 log(
@@ -46,7 +85,9 @@ export default (program: Command) =>
                     "Type :quit to exit the game."
                 );
 
-                const start = game.postStartCommand();
+                const cliOverrides = makeOptions(args);
+
+                const start = game.postStartCommand(cliOverrides);
                 printLines(start);
                 let gameInstance = start.instance;
 

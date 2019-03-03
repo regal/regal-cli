@@ -1,10 +1,10 @@
 import { spawn } from "child_process";
 import { execRegal } from "../test-utils";
 
-it("Play-Verify", done => {
+const testOut = (arg: string[], done) => {
     const bundlePath = "./test/e2e/resources/sample-game/temp/bundle.regal.js";
 
-    const proc = spawn(execRegal, ["play", bundlePath, "--seed", "w00f"], {
+    const proc = spawn(execRegal, ["play", bundlePath].concat(arg), {
         cwd: process.cwd(),
         shell: true
     });
@@ -34,4 +34,12 @@ it("Play-Verify", done => {
         expect(OUTPUT).toMatchSnapshot();
         done();
     });
+};
+
+describe("Play-Options", () => {
+    it("Play-Options: --debug", done =>
+        testOut(["--debug", "--seed", "seed1"], done));
+
+    it("Play-Options: --showMinor false", done =>
+        testOut(["--showMinor", "false", "--seed", "seed2"], done));
 });

@@ -7,6 +7,7 @@
 
 import { Command } from "commander";
 import { bundle, BundlerOptions, RecursivePartial } from "regal-bundler";
+import { parseBoolean } from "./utils";
 import { log } from "./wrappers";
 
 export default (program: Command) =>
@@ -68,21 +69,10 @@ export default (program: Command) =>
 
             // Handle --input-ts
             if (args.inputTs !== undefined) {
-                let isTS = args.inputTs;
-
-                if (typeof isTS === "string") {
-                    if (isTS === "true") {
-                        isTS = true;
-                    } else if (isTS === "false") {
-                        isTS = false;
-                    } else {
-                        throw new Error(
-                            "Illegal argument for --input-ts. Must be a boolean."
-                        );
-                    }
-                }
-
-                opts.bundler.input.ts = isTS;
+                opts.bundler.input.ts = parseBoolean(
+                    "--input-ts",
+                    args.inputTs
+                );
             }
 
             // Handle --output-file
@@ -102,21 +92,10 @@ export default (program: Command) =>
 
             // Handle --minify
             if (args.minify !== undefined) {
-                let min = args.minify;
-
-                if (typeof min === "string") {
-                    if (min === "true") {
-                        min = true;
-                    } else if (min === "false") {
-                        min = false;
-                    } else {
-                        throw new Error(
-                            "Illegal argument for --minify. Must be a boolean."
-                        );
-                    }
-                }
-
-                opts.bundler.output.minify = min;
+                opts.bundler.output.minify = parseBoolean(
+                    "--minify",
+                    args.minify
+                );
             }
 
             bundle(opts);

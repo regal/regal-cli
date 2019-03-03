@@ -6,11 +6,17 @@ interface S {
 
 onStartCommand(game => {
     game.output.write("Hello, world!");
+    game.output.writeDebug("Debug mode activated.");
     game.state.commands = [];
 });
 
 onPlayerCommand(cmd => (game: GameInstance<S>) => {
     game.output.write(`You just said ${cmd}.`);
+    game.output.writeMinor("What a cool word!");
+
+    game.output.writeDebug(
+        `Prior command list: ${JSON.stringify(game.state.commands)}`
+    );
 
     const numCmds = game.state.commands.length;
     let priorStr = "";

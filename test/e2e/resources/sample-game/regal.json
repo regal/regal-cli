@@ -1,10 +1,7 @@
 {
     "game": {
         "name": "Sample Game",
-        "author": "Lars",
-        "options": {
-            "seed": "w00f"
-        } 
+        "author": "Lars"
     },
     "bundler": {
         "input": { "file": "./src.ts" },
