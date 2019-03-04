@@ -6,3 +6,88 @@
 
 Command line interface for creating games with the Regal Framework
 
+## Installation
+
+In most cases, the Regal CLI should be installed a global dependency.
+
+```
+npm install -g regal-cli
+```
+
+The CLI peer depends on [**regal-bundler**](https://github.com/regal/regal-bundler), which must be installed manually. You can either install this as a global dependency:
+
+```
+npm install -g regal-bundler
+```
+
+Or, as a dev dependency in your project.
+
+```
+npm install --save-dev regal-bundler
+```
+
+Finally, confirm that you've installed everything correctly:
+
+```
+regal
+```
+
+The program should display some information and list the available commands.
+
+## Usage
+
+The Regal CLI automates several tasks related to making and playing [Regal games](https://github.com/regal/regal).
+
+Currently, the following commands are available:
+
+Command | Description | Reference
+--- | --- | ---
+`bundle [options]` | create a Regal game bundle | [Link](#bundle)
+`play [options] <file>` | play a standard Regal game bundle from the terminal | [Link](#play)
+
+## `bundle`
+
+The `bundle` command creates a Regal game bundle with [**regal-bundler**](https://github.com/regal/regal-bundler).
+
+### Basic Usage
+
+```
+regal bundle
+```
+
+The bundler will attempt to load configuration values from `regal.json` or `package.json`. If no values are found, their defaults will be used. For more information, see the [bundler documentation](https://github.com/regal/regal-bundler).
+
+### Options
+
+To see a list of all options, run:
+
+```
+regal bundle --help
+```
+
+The following options are available for the `bundle` command:
+
+Option | Description | Bundler Default*
+--- | --- | ---
+`-c, --config <dir>` | load configuration from a specific directory | `process.cwd()`
+`-i, --input-file <file>` | the root file of the game to bundle | `src/index.ts`
+`--input-ts [boolean]` | whether the source is TypeScript | `true`
+`-o, --output-file <file>` | game bundle output file | `[GAME_NAME].regal.js`
+`-f, --format <type>` | module format of the bundle: `cjs`, `esm`, or `umd` | `cjs`
+`-m, --minify [boolean]` | whether the bundle should be minified | `false`
+
+*The default values will be used if no configuration values can be found in `regal.json`, `package.json`, or the CLI. If an option is specified in one of these configuration files, there is no need to specify it in the CLI command. The CLI options override everything else, so they are used to bundle games differently than specified in the configuration file.
+
+### Examples
+
+Bundle the game as a minified UMD file:
+
+```
+regal bundle -f umd --minify
+```
+
+Load an alternate configuration from the `test` directory and save the bundle as `./test/game-test.regal.js`:
+
+```
+regal bundle -c ./test -o ./test/game-test.regal.js
+```
