@@ -8,7 +8,7 @@ Command line interface for creating games with the Regal Framework
 
 ## Installation
 
-In most cases, the Regal CLI should be installed a global dependency.
+In most cases, the Regal CLI should be installed as a global dependency.
 
 ```
 npm install -g regal-cli
@@ -76,7 +76,7 @@ Option | Description | Bundler Default*
 `-f, --format <type>` | module format of the bundle: `cjs`, `esm`, or `umd` | `cjs`
 `-m, --minify [boolean]` | whether the bundle should be minified | `false`
 
-*The default values will be used if no configuration values can be found in `regal.json`, `package.json`, or the CLI. If an option is specified in one of these configuration files, there is no need to specify it in the CLI command. The CLI options override everything else, so they are used to bundle games differently than specified in the configuration file.
+**The default values will be used if no configuration values can be found in `regal.json`, `package.json`, or the CLI. If an option is specified in one of these configuration files, there is no need to specify it in the CLI command. The CLI options override everything else, so they are used to bundle games differently than specified in the configuration file.*
 
 ### Examples
 
@@ -90,4 +90,49 @@ Load an alternate configuration from the `test` directory and save the bundle as
 
 ```
 regal bundle -c ./test -o ./test/game-test.regal.js
+```
+
+## `play`
+
+The `play` command plays a standard Regal game bundle from the terminal.
+
+### Basic Usage
+
+```
+regal play ./my-game.regal.js
+```
+
+### Options
+
+To see a list of all options, run:
+
+```
+regal play --help
+```
+
+The following options are available for the `play` command:
+
+Option | Description | Game Default*
+--- | --- | ---
+`--debug [boolean]` | load the game bundle in debug mode | `false`
+`--showMinor [boolean]` | whether minor output should be shown | `true`
+`--trackAgentChanges [boolean]` | whether all changes to agent properties should be tracked | `false`
+`--seed <string>` | Optional string used to initialize psuedorandom number generation in each game instance | None
+
+When one or more options are specified, a new game instance is generated with those game options. For more information, see the Regal Game Library's [configuration docs](https://github.com/regal/regal#configuration).
+
+**The default values will be used if no option overrides were specified in `regal.json`, `package.json`, or the CLI. If an option is specified in one of these configuration files, there is no need to specify it in the CLI command. The CLI options override everything else, so they are used to bundle games differently than specified in the configuration file.*
+
+### Examples
+
+Play a game in debug mode:
+
+```
+regal play ./bundle.regal.js --debug
+```
+
+Play a game that's seeded and doesn't show minor output:
+
+```
+regal play ./bundle.regal.js --showMinor false --seed hello
 ```
