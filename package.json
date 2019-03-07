@@ -1,6 +1,6 @@
 {
     "name": "regal-cli",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Command line interface for creating games with the Regal Framework",
     "author": "Joe Cowman <joe.r.cowman@gmail.com> (http://joecowman.com)",
     "license": "MIT",
@@ -14,7 +14,8 @@
     "main": "dist/regal-cli.cjs.js",
     "module": "dist/regal-cli.esm.js",
     "files": [
-        "dist/"
+        "dist/",
+        "bin/"
     ],
     "scripts": {
         "build": "rollup -c",
