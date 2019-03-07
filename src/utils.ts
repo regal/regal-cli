@@ -1,3 +1,10 @@
+/*
+ * Utility functions for the Regal CLI.
+ *
+ * Copyright (c) Joseph R Cowman
+ * Licensed under MIT License (see https://github.com/regal/regal-bundler)
+ */
+
 export const parseBoolean = (argName: string, argValue: string) => {
     if (typeof argValue === "boolean") {
         return argValue;

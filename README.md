@@ -121,7 +121,7 @@ Option | Description | Game Default*
 
 When one or more options are specified, a new game instance is generated with those game options. For more information, see the Regal Game Library's [configuration docs](https://github.com/regal/regal#configuration).
 
-**The default values will be used if no option overrides were specified in `regal.json`, `package.json`, or the CLI. If an option is specified in one of these configuration files, there is no need to specify it in the CLI command. The CLI options override everything else, so they are used to bundle games differently than specified in the configuration file.*
+**The default values will be used if no option overrides were specified in `regal.json`, `package.json`, or the CLI. If an option is specified in one of these configuration files, there is no need to specify it in the CLI command. The CLI options override everything else, so they are used to play games configured differently than they are specified in their configuration files.*
 
 ### Examples
 
