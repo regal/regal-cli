@@ -14,6 +14,12 @@ In most cases, the Regal CLI should be installed as a global dependency.
 npm install -g regal-cli
 ```
 
+The CLI peer depends on [**regal**](https://github.com/regal/regal), so you'll have to install it if you haven't already.
+
+```
+npm install -g regal
+```
+
 Confirm that you've installed everything correctly:
 
 ```
