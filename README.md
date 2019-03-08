@@ -1,5 +1,5 @@
 # regal-cli
-
+[![npm version](https://badge.fury.io/js/regal-cli.svg)](https://badge.fury.io/js/regal-cli)
 [![CircleCI](https://circleci.com/gh/regal/regal-cli.svg?style=svg)](https://circleci.com/gh/regal/regal-cli)
 [![Coverage Status](https://coveralls.io/repos/github/regal/regal-cli/badge.svg?branch=master)](https://coveralls.io/github/regal/regal-cli?branch=master)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
@@ -14,19 +14,7 @@ In most cases, the Regal CLI should be installed as a global dependency.
 npm install -g regal-cli
 ```
 
-The CLI peer depends on [**regal-bundler**](https://github.com/regal/regal-bundler), which must be installed manually. You can either install this as a global dependency:
-
-```
-npm install -g regal-bundler
-```
-
-Or, as a dev dependency in your project.
-
-```
-npm install --save-dev regal-bundler
-```
-
-Finally, confirm that you've installed everything correctly:
+Confirm that you've installed everything correctly:
 
 ```
 regal
