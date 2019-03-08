@@ -14,19 +14,7 @@ In most cases, the Regal CLI should be installed as a global dependency.
 npm install -g regal-cli
 ```
 
-The CLI peer depends on [**regal-bundler**](https://github.com/regal/regal-bundler), which must be installed manually. You can either install this as a global dependency:
-
-```
-npm install -g regal-bundler
-```
-
-Or, as a dev dependency in your project.
-
-```
-npm install --save-dev regal-bundler
-```
-
-Finally, confirm that you've installed everything correctly:
+Confirm that you've installed everything correctly:
 
 ```
 regal
