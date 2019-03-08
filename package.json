@@ -1,6 +1,6 @@
 {
     "name": "regal-cli",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "description": "Command line interface for creating games with the Regal Framework",
     "author": "Joe Cowman <joe.r.cowman@gmail.com> (http://joecowman.com)",
     "license": "MIT",
