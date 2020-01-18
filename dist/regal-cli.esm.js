@@ -10,7 +10,7 @@ import { bundle } from 'regal-bundler';
 import { join } from 'path';
 import { createInterface } from 'readline';
 
-var version$1 = "1.1.0";
+var version$1 = "1.2.0";
 var description = "Command line interface for creating games with the Regal Framework";
 
 const parseBoolean = (argName, argValue) => {

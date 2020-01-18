@@ -11,7 +11,7 @@ var regalBundler = require('regal-bundler');
 var path = require('path');
 var readline = require('readline');
 
-var version = "1.1.0";
+var version = "1.2.0";
 var description = "Command line interface for creating games with the Regal Framework";
 
 const parseBoolean = (argName, argValue) => {
