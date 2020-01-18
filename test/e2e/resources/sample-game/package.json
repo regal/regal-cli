@@ -1,6 +1,6 @@
 {
     "dependencies": {
-        "regal": "^1.0.0"
+        "regal": "^2.0.0"
     },
     "devDependencies": {
         "regal-bundler": "^1.3.0",
