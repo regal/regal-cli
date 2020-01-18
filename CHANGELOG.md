@@ -1,5 +1,10 @@
 # Regal CLI Changelog
 
+## v1.2.0 (2020-01-18)
+
+### Dependency Changes
+* Update `regal-bundler` to "^1.3.0" ([8fd90ea](https://github.com/regal/regal-cli/commit/8fd90ea2e5b109d9c1d717ae42a93d4e6956aa7f))
+
 ## v1.1.0 (2019-03-08)
 
 ### Dependency Changes
